@@ -20,7 +20,7 @@ coord = (rx
 )
 ```
 
-Although it's more code, it's much more readable and maintainable. Suppose you want to support arbitrary number of whitespace. The diff for this change will be much cleaner compared to changing the raw regular expression:
+Although it's more code, it's much more readable. Suppose you want to support arbitrary number of whitespace. The diff for this change will be much cleaner compared to changing the raw regular expression:
 
 ```python
 decimal = (rx
