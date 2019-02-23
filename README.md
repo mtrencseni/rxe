@@ -19,7 +19,7 @@ coord = (rx
 )
 ```
 
-Although it's more code, it's much more readable. Suppose you want to support arbitrary number of whitespace. The diff for this change will be much cleaner compared to changing the raw regular expression:
+Although it's more code, it's much more readable. Suppose you want to support arbitrary number of whitespace. The diff for this change will be:
 
 ```python
 decimal = (rx
@@ -29,13 +29,13 @@ decimal = (rx
 )
 coord = (rx
   .literal('(')
-  .zero_or_more(rx.whitespace()) # line added
+  .zero_or_more(rx.whitespace()) # <--- line added
   .exactly(1, decimal)
-  .zero_or_more(rx.whitespace()) # line added
+  .zero_or_more(rx.whitespace()) # <--- line added
   .literal(',')
-  .zero_or_more(rx.whitespace()) # line added
+  .zero_or_more(rx.whitespace()) # <--- line added
   .exactly(1, decimal)
-  .zero_or_more(rx.whitespace()) # line added
+  .zero_or_more(rx.whitespace()) # <--- line added
   .literal(')')
 )
 ```
