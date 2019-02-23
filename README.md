@@ -1,5 +1,4 @@
-# rx
-rx: literate regular expressions
+# rx: literate regular expressions
 
 Suppose you want to parse geo coordinates from a string, like `(<latitude>,<longitude>)`, where each is a decimal. The raw regular expression would look like `\(\d+\.\d\+,\d+\.\d\+)`. This is hard to read and maintain for the next guy, and diffs will be hard to understand and verify.
 
