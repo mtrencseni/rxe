@@ -22,11 +22,6 @@ coord = (rxe
 Although it's more code, it's much more readable. Suppose you want to support arbitrary number of whitespace. The diff for this change will be:
 
 ```python
-decimal = (rxe
-  .one_or_more(rxe.digit())
-  .literal('.')
-  .one_or_more(rxe.digit())
-)
 coord = (rxe
   .literal('(')
   .zero_or_more(rxe.whitespace()) # <--- line added
@@ -40,8 +35,28 @@ coord = (rxe
 )
 ```
 
+Okay, but we also want to get the latitude and longitude. Let's extract them, but in a readable way:
+
+```python
+coord = (rxe
+  .literal('(')
+  .zero_or_more(rxe.whitespace())
+  .exactly(1, rxe.named('lat', decimal)) # <--- line changed
+  .zero_or_more(rxe.whitespace())
+  .literal(',')
+  .zero_or_more(rxe.whitespace())
+  .exactly(1, rxe.named('lat', decimal)) # <--- line changed
+  .zero_or_more(rxe.whitespace())
+  .literal(')')
+)
+
+m = coord2.match('(23.34, 11.0)')
+print(m.group('lat'))
+print(m.group('lon'))
+```
+
 Todos
 -----
 
-- ability to write rxe.whitespace() instead of rxe().whitespace() for all functions
 - write a lot of tests
+- add documentation
