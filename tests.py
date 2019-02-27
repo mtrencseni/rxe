@@ -1,8 +1,8 @@
 
 import re
-import rx
+import rxe
 
-# r1 = (rx
+# r1 = (rxe
 #     .digit()
 #     .min(n=1, s='p')
 #     .min(n=2, s='q')
@@ -12,9 +12,9 @@ import rx
 # print(r1.match('pqq'))
 # print(r1.match('3hello'))
 
-# r2 = (rx
+# r2 = (rxe
 #     .literal('(')
-#     .zero_or_more(rx.alphanumeric())
+#     .zero_or_more(rxe.alphanumeric())
 #     .literal(')')
 #     .zero_or_one('hello')
 #     )
@@ -25,17 +25,17 @@ import rx
 # print(r2.fullmatch('(43453453)hello'))
 # print(r2.fullmatch('(43453453)helloZ'))
 
-# decimal_expr = (rx
-#     .min(1, rx.digit())
+# decimal_expr = (rxe
+#     .min(1, rxe.digit())
 #     .literal('.')
-#     .min(1, rx.digit())
+#     .min(1, rxe.digit())
 #     )
 
-# int_expr = (rx
-#     .min(1, rx.digit())
+# int_expr = (rxe
+#     .min(1, rxe.digit())
 #     )
 
-# number = rx.either(decimal_expr, int_expr)
+# number = rxe.either(decimal_expr, int_expr)
 
 # print(number.fullmatch('hello'))
 # print(number.fullmatch('12323'))
@@ -43,9 +43,9 @@ import rx
 # print(number.fullmatch('0'))
 # print(number.fullmatch('0.'))
 
-r3 = (rx
+r3 = (rxe
     .literal('x')
-    .named('middle', rx.set(['a', 'b', 'c', rx.digit()]))
+    .named('middle', rxe.set(['a', 'b', 'c', rxe.digit()]))
     .literal('y')
     )
 print(r3.fullmatch('xay'))
@@ -57,4 +57,3 @@ print(r3.fullmatch('x11y'))
 print(r3.fullmatch('xaay'))
 print(r3.fullmatch('hello'))
 print(r3.fullmatch('x1y').group('middle'))
-

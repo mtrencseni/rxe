@@ -1,6 +1,6 @@
 import re
 
-class rx:
+class rxe:
     def __init__(self):
         self.regex = ''
     
@@ -56,12 +56,12 @@ class rx:
     def to_regexp_str(s):
         if type(s) is str:
             return re.escape(s)
-        elif type(s) is type(rx()):
+        elif type(s) is type(rxe()):
             return s.regex
         return s
     
     def min(self, n, s):
-        s = rx.to_regexp_str(s)
+        s = rxe.to_regexp_str(s)
         parens = '(?:' + s + ')'
         if n == 0:
             self.regex += parens + '*'
@@ -72,13 +72,13 @@ class rx:
         return self
     
     def exactly(self, n, s):
-        s = rx.to_regexp_str(s)
+        s = rxe.to_regexp_str(s)
         parens = '(?:' + s + ')'
         self.regex += parens + '{%d}' % n
         return self
 
     def minmax(self, min, max, s):
-        s = rx.to_regexp_str(s)
+        s = rxe.to_regexp_str(s)
         parens = '(?:' + s + ')'
         if min == 0 and max == 1:
             self.regex += parens + '?'
@@ -99,35 +99,35 @@ class rx:
         return self.raw('?')
     
     def either(self, s1, s2):
-        s1 = rx.to_regexp_str(s1)
-        s2 = rx.to_regexp_str(s2)
+        s1 = rxe.to_regexp_str(s1)
+        s2 = rxe.to_regexp_str(s2)
         parens1 = '(?:' + s1 + ')'
         parens2 = '(?:' + s2 + ')'
         self.regex += parens1 + '|' + parens2
         return self
     
     def set(self, li):
-        s = ''.join([rx.to_regexp_str(i) for i in li])
+        s = ''.join([rxe.to_regexp_str(i) for i in li])
         self.regex += '[' + s + ']'
         return self
 
     def non_named(self, name, s):
-        s = rx.to_regexp_str(s)
+        s = rxe.to_regexp_str(s)
         self.regex += '(' + s + ')'
         return self
     
     def named(self, name, s):
-        s = rx.to_regexp_str(s)
+        s = rxe.to_regexp_str(s)
         self.regex += '(?P<%s>%s)' % (name, s)
         return self
     
     def assert_lookahead(self, s):
-        s = rx.to_regexp_str(s)
+        s = rxe.to_regexp_str(s)
         self.regex += '(?=' + s + ')'
         return self
     
     def assert_lookahead_not(self, s):
-        s = rx.to_regexp_str(s)
+        s = rxe.to_regexp_str(s)
         self.regex += '(?!' + s + ')'
         return self
     
@@ -163,20 +163,19 @@ class rx:
         return re.subn(self.regex, repl, string, count=0, flags=0)
     
 def digit():
-    return rx().digit()
+    return rxe().digit()
     
 def alphanumeric():
-    return rx().alphanumeric()
+    return rxe().alphanumeric()
 
 def literal(s):
-    return rx().literal(s)
+    return rxe().literal(s)
 
 def min(n, s):
-    return rx().min(n, s)
+    return rxe().min(n, s)
 
 def either(s1, s2):
-    return rx().either(s1, s2)
+    return rxe().either(s1, s2)
 
 def set(li):
-    return rx().set(li)
-
+    return rxe().set(li)
