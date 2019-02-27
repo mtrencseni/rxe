@@ -60,3 +60,4 @@ Todos
 
 - write a lot of tests
 - add documentation
+- pip install rxe
