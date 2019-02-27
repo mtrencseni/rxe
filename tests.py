@@ -2,92 +2,65 @@
 import re
 import rxe
 
-# r1 = (rxe
-#     .digit()
-#     .min(n=1, s='p')
-#     .min(n=2, s='q')
-#     )
+def test_rxe():
+    r = rxe.digit().min(n=1, s='p').min(n=2, s='q')
+    assert(r.match('1ppppqqqqq') is not None)
+    assert(r.match('pqq') is None)
+    assert(r.match('3hello') is None)
 
-# print(r1.match('1ppppqqqqq'))
-# print(r1.match('pqq'))
-# print(r1.match('3hello'))
+    r = (rxe.literal('(').zero_or_more(rxe.alphanumeric()).literal(')').zero_or_one('hello'))
+    assert(r.match('(43453453)sdsd') is not None)
+    assert(r.fullmatch('(43453453)sdsd') is None)
+    assert(r.fullmatch('(43453453)') is not None)
+    assert(r.fullmatch('(43453453)hello') is not None)
+    assert(r.fullmatch('(43453453)helloZ') is None)
 
-# r2 = (rxe
-#     .literal('(')
-#     .zero_or_more(rxe.alphanumeric())
-#     .literal(')')
-#     .zero_or_one('hello')
-#     )
+    decimal_expr = (rxe
+        .min(1, rxe.digit())
+        .literal('.')
+        .min(1, rxe.digit())
+        )
+    int_expr = (rxe
+        .min(1, rxe.digit())
+        )
+    number = rxe.either(decimal_expr, int_expr)
+    assert(number.fullmatch('hello') is None)
+    assert(number.fullmatch('12323') is not None)
+    assert(number.fullmatch('0.984') is not None)
+    assert(number.fullmatch('0') is not None)
+    assert(number.fullmatch('0.') is None)
 
-# print(r2.match('(43453453)sdsd'))
-# print(r2.fullmatch('(43453453)sdsd'))
-# print(r2.fullmatch('(43453453)'))
-# print(r2.fullmatch('(43453453)hello'))
-# print(r2.fullmatch('(43453453)helloZ'))
+    r = (rxe.literal('x').named('middle', rxe.set(['a', 'b', 'c', rxe.digit()])).literal('y'))
+    assert(r.fullmatch('xay') is not None)
+    assert(r.fullmatch('xby') is not None)
+    assert(r.fullmatch('xcy') is not None)
+    assert(r.fullmatch('x1y') is not None)
+    assert(r.fullmatch('xy') is None)
+    assert(r.fullmatch('x11y') is None)
+    assert(r.fullmatch('xaay') is None)
+    assert(r.fullmatch('hello') is None)
+    assert(r.fullmatch('x1y').group('middle') == '1')
 
-# decimal_expr = (rxe
-#     .min(1, rxe.digit())
-#     .literal('.')
-#     .min(1, rxe.digit())
-#     )
-
-# int_expr = (rxe
-#     .min(1, rxe.digit())
-#     )
-
-# number = rxe.either(decimal_expr, int_expr)
-
-# print(number.fullmatch('hello'))
-# print(number.fullmatch('12323'))
-# print(number.fullmatch('0.984'))
-# print(number.fullmatch('0'))
-# print(number.fullmatch('0.'))
-
-# r3 = (rxe
-#     .literal('x')
-#     .named('middle', rxe.set(['a', 'b', 'c', rxe.digit()]))
-#     .literal('y')
-#     )
-# print(r3.fullmatch('xay'))
-# print(r3.fullmatch('xby'))
-# print(r3.fullmatch('xcy'))
-# print(r3.fullmatch('x1y'))
-# print(r3.fullmatch('xy'))
-# print(r3.fullmatch('x11y'))
-# print(r3.fullmatch('xaay'))
-# print(r3.fullmatch('hello'))
-# print(r3.fullmatch('x1y').group('middle'))
-
-decimal = (rxe
-  .one_or_more(rxe.digit())
-  .literal('.')
-  .one_or_more(rxe.digit())
-)
-coord1 = (rxe
-  .literal('(')
-  .exactly(1, decimal)
-  .literal(',')
-  .exactly(1, decimal)
-  .literal(')')
-)
-print(coord1.fullmatch('hello'))
-print(coord1.fullmatch('(23.34,11.0)'))
-print(coord1.fullmatch('(23.34, 11.0)'))
-coord2 = (rxe
-  .literal('(')
-  .zero_or_more(rxe.whitespace()) # <--- line added
-  .exactly(1, rxe.named('lat', decimal))
-  .zero_or_more(rxe.whitespace()) # <--- line added
-  .literal(',')
-  .zero_or_more(rxe.whitespace()) # <--- line added
-  .exactly(1, rxe.named('lon', decimal))
-  .zero_or_more(rxe.whitespace()) # <--- line added
-  .literal(')')
-)
-print(coord2.fullmatch('hello'))
-print(coord2.fullmatch('(23.34,11.0)'))
-print(coord2.fullmatch('(23.34, 11.0)'))
-print(coord2.fullmatch('(    23.34  , 11.0  )'))
-m = coord2.match('(23.34, 11.0)')
-print(m.group('lat'))
-print(m.group('lon'))
+    decimal = (rxe.one_or_more(rxe.digit()).literal('.').one_or_more(rxe.digit()))
+    coord = (rxe.literal('(').exactly(1, decimal).literal(',').exactly(1, decimal).literal(')'))
+    assert(coord.fullmatch('hello') is None)
+    assert(coord.fullmatch('(23.34,11.0)') is not None)
+    assert(coord.fullmatch('(23.34, 11.0)') is None)
+    coord = (rxe
+      .literal('(')
+      .zero_or_more(rxe.whitespace()) # <--- line added
+      .exactly(1, rxe.named('lat', decimal))
+      .zero_or_more(rxe.whitespace()) # <--- line added
+      .literal(',')
+      .zero_or_more(rxe.whitespace()) # <--- line added
+      .exactly(1, rxe.named('lon', decimal))
+      .zero_or_more(rxe.whitespace()) # <--- line added
+      .literal(')')
+    )
+    assert(coord.fullmatch('hello') is None)
+    assert(coord.fullmatch('(23.34,11.0)') is not None)
+    assert(coord.fullmatch('(23.34, 11.0)') is not None)
+    assert(coord.fullmatch('(    23.34  , 11.0  )') is not None)
+    m = coord.match('(23.34, 11.0)')
+    assert(m.group('lat') == '23.34')
+    assert(m.group('lon') == '11.0')
