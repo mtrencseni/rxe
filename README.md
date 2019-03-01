@@ -162,4 +162,4 @@ Most of these functions correspond to [patterns of functions](https://docs.pytho
 
 ### Todos
 
-- pip install rxe
+- write more tests
