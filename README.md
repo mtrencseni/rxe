@@ -126,6 +126,25 @@ Use `pip`:
 
 `assert_lookahead_not(s)`: todo
 
+`get_pattern()`: todo
+
+`fullmatch(s)`: todo
+
+`compile(flags=0)`: todo
+
+`search(string, flags=0)`: todo
+
+`match(string, flags=0)`: todo
+
+`split(string, maxsplit=0, flags=0)`: todo
+
+`findall(string, flags=0)`: todo
+
+`finditer(string, flags=0)`: todo
+
+`sub(repl, string, count=0, flags=0)`: todo
+
+`subn(repl, string, count=0, flags=0)`: todo
 
 ### Todos
 
