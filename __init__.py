@@ -1,1 +1,3 @@
-name = "rxe"
+name = 'rxe'
+
+__all__ = ['rxe']
