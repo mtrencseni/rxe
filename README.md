@@ -133,17 +133,17 @@ Most of these functions correspond to [patterns of functions](https://docs.pytho
 
 `get_pattern()`: Returns the underlying regular expression pattern.
 
-`fullmatch(s)`: `True` if 
+`fullmatch(s)`: `True` if the pattern matches `s`, and consumes all of `s`.
 
-`compile(flags=0)`: todo
+`compile(flags=0)`: Compile a regular expression pattern into a regular expression object, which can be used for matching using its `match()` and `search()` methods. [See re docs](https://docs.python.org/2/library/re.html).
 
-`search(string, flags=0)`: todo
+`search(string, flags=0)`: Scan through `string` looking for the first location where the regular expression pattern produces a match, and return a corresponding `MatchObject` instance. Return `None` if no position in the string matches the pattern; note that this is different from finding a zero-length match at some point in the string.  [See re docs](https://docs.python.org/2/library/re.html).
 
 `match(string, flags=0)`: todo
 
 `split(string, maxsplit=0, flags=0)`: todo
 
-`findall(string, flags=0)`: todo
+`findall(string, flags=0)`: 
 
 `finditer(string, flags=0)`: todo
 
