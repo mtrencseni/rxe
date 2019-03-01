@@ -73,7 +73,18 @@ print(m.group('lon'))
 
 Use `pip`:
 
-```pip install rxe```
+```pip install git+git://github.com/mtrencseni/rxe```
+
+Then:
+
+```
+
+ $ python
+>>> from rxe import *
+>>> r = rxe.digit().min(n=1, s='p').min(n=2, s='q')
+>>> assert(r.match('1ppppqqqqq') is not None) 
+ 
+```
 
 ### Docs
 
