@@ -2,12 +2,17 @@
 
 ### Contents
 
-- [Description](#description)
+- [Introduction](#introduction)
+- [Motivation](#motivation)
 - [Install](#install)
 - [Docs](#docs)
 - [Todos](#todos)
 
-### Description
+### Introduction
+
+`rxe` is a thin wrapper around Python's `re` module. The various `rxe` functions are wrapper around corresponding `re` patterns. For example, `rxe.digit().one_or_more('a').whitespace()` corresponds to `\da+\s`. Because `rxe` uses parentheses but wants to avoid unnamed groups, the internal (equivalent) representation is actually `\d(?:a)+\s`. This pattern can always be retrieved with `get_pattern()`.
+
+### Motivation
 
 Suppose you want to parse geo coordinates from a string, like `(<latitude>,<longitude>)`, where each is a decimal. The raw regular expression would look like `\(\d+\.\d\+,\d+\.\d\+)`. This is hard to read and maintain for the next guy, and diffs will be hard to understand and verify.
 
@@ -114,21 +119,19 @@ Use `pip`:
 
 `non_greedy(self)`: Causes the *preceding* part of the pattern to be non-greedy.
 
-`either(s1, s2)`: todo
+`either(s1, s2)`: Matches either `s1` or `s2`. Both `s1` and `s2` can `rxe` objects.
 
-`set(li)`: todo
+`set(li)`: Matches the set `li`, which can also include `rxe` objects. Example `['a', 'b', rxe.digit()]`
 
-`non_named(name, s)`: todo
+`named(name, s)`: Creates a named match group, see the example above.
 
-`named(name, s)`: todo
+`assert_lookahead(s)`: Matches if `s` matches next, but doesn’t consume any of the string.
 
-`assert_lookahead(s)`: todo
+`assert_lookahead_not(s)`: Matches if `s` doesn’t match next.
 
-`assert_lookahead_not(s)`: todo
+`get_pattern()`: Returns the underlying regular expression pattern.
 
-`get_pattern()`: todo
-
-`fullmatch(s)`: todo
+`fullmatch(s)`: `True` if 
 
 `compile(flags=0)`: todo
 

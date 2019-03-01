@@ -111,11 +111,6 @@ class rxe:
         self.pattern += '[' + s + ']'
         return self
 
-    def non_named(self, name, s):
-        s = rxe.to_regexp_str(s)
-        self.pattern += '(' + s + ')'
-        return self
-    
     def named(self, name, s):
         s = rxe.to_regexp_str(s)
         self.pattern += '(?P<%s>%s)' % (name, s)
