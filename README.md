@@ -1,4 +1,4 @@
-# rxe: literate + composable regular expressions
+# rxe: literate and composable regular expressions
 
 ### Contents
 
