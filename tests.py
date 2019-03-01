@@ -64,3 +64,15 @@ def test_rxe():
     m = coord.match('(23.34, 11.0)')
     assert(m.group('lat') == '23.34')
     assert(m.group('lon') == '11.0')
+
+    r = rxe.literal('x')
+    assert(r.fullmatch('x') is not None)
+    assert(r.fullmatch('xx') is None)
+    assert(r.fullmatch('xy') is None)
+    assert(r.fullmatch('yx') is None)
+    assert(r.fullmatch('yz') is None)
+    
+    print('All good.')
+
+if __name__ == "__main__":
+    test_rxe()

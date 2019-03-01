@@ -1,5 +1,14 @@
 # rxe: literate regular expressions
 
+### Contents
+
+- [Description](#description)
+- [Install](#install)
+- [Docs](#docs)
+- [Todos](#todos)
+
+### Description
+
 Suppose you want to parse geo coordinates from a string, like `(<latitude>,<longitude>)`, where each is a decimal. The raw regular expression would look like `\(\d+\.\d\+,\d+\.\d\+)`. This is hard to read and maintain for the next guy, and diffs will be hard to understand and verify.
 
 With rx, you can write:
@@ -55,9 +64,17 @@ print(m.group('lat'))
 print(m.group('lon'))
 ```
 
-Todos
------
+## Install
 
-- write a lot of tests
+Use `pip`:
+
+```pip install rxe```
+
+### Docs
+
+`any_character()`: In the default mode, this matches any character except a newline. If the `DOTALL` flag has been specified, this matches any character including a newline.
+
+### Todos
+
 - add documentation
 - pip install rxe
