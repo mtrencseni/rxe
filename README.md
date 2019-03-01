@@ -137,21 +137,20 @@ Most of these functions correspond to [patterns of functions](https://docs.pytho
 
 `compile(flags=0)`: Compile a regular expression pattern into a regular expression object, which can be used for matching using its `match()` and `search()` methods. [See re docs](https://docs.python.org/2/library/re.html).
 
-`search(string, flags=0)`: Scan through `string` looking for the first location where the regular expression pattern produces a match, and return a corresponding `MatchObject` instance. Return `None` if no position in the string matches the pattern; note that this is different from finding a zero-length match at some point in the string.  [See re docs](https://docs.python.org/2/library/re.html).
+`search(string, flags=0)`: Scan through `string` looking for the first location where the regular expression pattern produces a match, and return a corresponding `MatchObject` instance. Return `None` if no position in the string matches the pattern; note that this is different from finding a zero-length match at some point in the string. [See re docs](https://docs.python.org/2/library/re.html).
 
-`match(string, flags=0)`: todo
+`match(string, flags=0)`: If zero or more characters at the beginning of string match the regular expression pattern, return a corresponding `MatchObject` instance. Return `None` if the string does not match the pattern; note that this is different from a zero-length match. [See re docs](https://docs.python.org/2/library/re.html).
 
-`split(string, maxsplit=0, flags=0)`: todo
+`split(string, maxsplit=0, flags=0)`: Split string by the occurrences of pattern. If capturing parentheses are used in pattern, then the text of all groups in the pattern are also returned as part of the resulting list. If `maxsplit` is nonzero, at most `maxsplit` splits occur, and the remainder of the string is returned as the final element of the list.
 
-`findall(string, flags=0)`: 
+`findall(string, flags=0)`: Return all non-overlapping matches of pattern in string, as a list of strings. The string is scanned left-to-right, and matches are returned in the order found. If one or more groups are present in the pattern, return a list of groups; this will be a list of tuples if the pattern has more than one group. Empty matches are included in the result.
 
-`finditer(string, flags=0)`: todo
+`finditer(string, flags=0)`: Return an iterator yielding `MatchObject` instances over all non-overlapping matches for the pattern in string. The string is scanned left-to-right, and matches are returned in the order found. Empty matches are included in the result.
 
-`sub(repl, string, count=0, flags=0)`: todo
+`sub(repl, string, count=0, flags=0)`: Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement `repl`.
 
-`subn(repl, string, count=0, flags=0)`: todo
+`subn(repl, string, count=0, flags=0)`: Perform the same operation as `sub()`, but return a tuple `(new_string, number_of_subs_made)`.
 
 ### Todos
 
-- add documentation
 - pip install rxe
