@@ -10,7 +10,7 @@
 
 ### Introduction
 
-`rxe` is a thin wrapper around Python's `re` module. The various `rxe` functions are wrapper around corresponding `re` patterns. For example, `rxe.digit().one_or_more('a').whitespace()` corresponds to `\da+\s`. Because `rxe` uses parentheses but wants to avoid unnamed groups, the internal (equivalent) representation is actually `\d(?:a)+\s`. This pattern can always be retrieved with `get_pattern()`.
+`rxe` is a thin wrapper around Python's `re` module (see [official re docs](https://docs.python.org/2/library/re.html)). The various `rxe` functions are wrapper around corresponding `re` patterns. For example, `rxe.digit().one_or_more('a').whitespace()` corresponds to `\da+\s`. Because `rxe` uses parentheses but wants to avoid unnamed groups, the internal (equivalent) representation is actually `\d(?:a)+\s`. This pattern can always be retrieved with `get_pattern()`.
 
 ### Motivation
 
@@ -76,6 +76,8 @@ Use `pip`:
 ```pip install rxe```
 
 ### Docs
+
+Most of these functions correspond to [patterns of functions](https://docs.python.org/2/library/re.html) from `re`.
 
 `any_character()`: In the default mode, this matches any character except a newline. If the `DOTALL` flag has been specified, this matches any character including a newline.
 
