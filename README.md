@@ -78,12 +78,10 @@ Use `pip`:
 Then:
 
 ```
-
- $ python
+$ python
 >>> from rxe import *
 >>> r = rxe.digit().min(n=1, s='p').min(n=2, s='q')
 >>> assert(r.match('1ppppqqqqq') is not None) 
- 
 ```
 
 ### Docs
