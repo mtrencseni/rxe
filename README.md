@@ -71,6 +71,22 @@ print(m.group('lat'))
 print(m.group('lon'))
 ```
 
+One more example, parsing email addresses. The regex is `[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,6}`. The equivalent `rxe` code:
+
+```
+username = rxe.one_or_more(rxe.set([rxe.alphanumeric(), '.', '%', '+', '-']))
+domain = (rxe
+	.one_or_more(rxe.set([rxe.alphanumeric(), '.', '-']))
+	.literal('.')
+	.at_least_at_most(2, 6, rxe.set([rxe.range('a', 'z'), rxe.range('A', 'Z')]))
+)
+email = (rxe
+	.exactly(1, username)
+	.literal('@')
+	.exactly(1, domain)
+)
+```
+
 ## Install
 
 Use `pip`:
@@ -82,7 +98,7 @@ Then:
 ```
 $ python
 >>> from rxe import *
->>> r = rxe.digit().min(n=1, s='p').min(n=2, s='q')
+>>> r = rxe.digit().at_least(1, 'p').at_least(2, 'q')
 >>> assert(r.match('1ppppqqqqq') is not None) 
 ```
 

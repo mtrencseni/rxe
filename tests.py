@@ -79,6 +79,24 @@ def test_rxe():
     assert(r.fullmatch('x*y') is None)
     assert(r.fullmatch('xy') is None)
     
+    username = rxe.one_or_more(rxe.set([rxe.alphanumeric(), '.', '%', '+', '-']))
+    domain = (rxe
+    	.one_or_more(rxe.set([rxe.alphanumeric(), '.', '-']))
+    	.literal('.')
+    	.at_least_at_most(2, 6, rxe.set([rxe.range('a', 'z'), rxe.range('A', 'Z')]))
+    )
+    email = (rxe
+    	.exactly(1, username)
+    	.literal('@')
+    	.exactly(1, domain)
+    )
+    assert(email.fullmatch('username@domain.com') is not None)
+    assert(email.fullmatch('username!domain.com') is None)
+    assert(email.fullmatch('username@domaincom') is None)
+    assert(email.fullmatch('1sername@domain.com') is not None)
+    assert(email.fullmatch('1sername@1omain.com') is not None)
+    assert(email.fullmatch('1sername@1omain.1om') is None)
+    
     print('All good.')
 
 if __name__ == "__main__":
