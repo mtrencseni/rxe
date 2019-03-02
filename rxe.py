@@ -80,6 +80,9 @@ class rxe:
         parens = '(?:' + s + ')'
         self.pattern += parens + '{%d}' % n
         return self
+    
+    def one(self, s):
+        return self.exactly(1, s)
 
     def at_least_at_most(self, min, max, s):
         s = rxe.to_regexp_str(s)
@@ -214,6 +217,9 @@ def at_least(n, s):
 
 def exactly(n, s):
     return rxe().exactly(n, s)
+
+def one(s):
+    return rxe().one(s)
 
 def at_least_at_most(min, max, s):
     return rxe().at_least_at_most(min, max, s)

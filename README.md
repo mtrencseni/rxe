@@ -75,15 +75,14 @@ One more example, parsing email addresses. The regex is `[\w.%+-]+@[\w.-]+\.[a-z
 
 ```
 username = rxe.one_or_more(rxe.set([rxe.alphanumeric(), '.', '%', '+', '-']))
-domain = (rxe
-	.one_or_more(rxe.set([rxe.alphanumeric(), '.', '-']))
-	.literal('.')
-	.at_least_at_most(2, 6, rxe.set([rxe.range('a', 'z'), rxe.range('A', 'Z')]))
-)
+domain = rxe.one_or_more(rxe.set([rxe.alphanumeric(), '.', '-']))
+tld = rxe.at_least_at_most(2, 6, rxe.set([rxe.range('a', 'z'), rxe.range('A', 'Z')]))
 email = (rxe
-	.exactly(1, username)
+	.exactly(username)
 	.literal('@')
-	.exactly(1, domain)
+	.exactly(domain)
+	.literal('.')
+	.exactly(tld)
 )
 ```
 
@@ -139,6 +138,8 @@ Most of these functions correspond to [patterns of functions](https://docs.pytho
 `at_least(n, s)`: Matches if `s` occurs at least `n` times. `s` can be a literal or an `rxe` object.
 
 `exactly(n, s)`: Matches if `s` occurs exactly `n` times. `s` can be a literal or an `rxe` object.
+
+`one(s)`: Shorthand for `exactly(n=1, s)`.
 
 `at_least_at_most(min, max, s)`: Matches if `s` occurs at least `min`, at most `max` times. `s` can be a literal or an `rxe` object.
 
