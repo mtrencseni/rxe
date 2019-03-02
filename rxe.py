@@ -60,7 +60,11 @@ class rxe:
             return s.pattern
         return s
     
-    def min(self, n, s):
+    def range(self, fr, to):
+        self.pattern += fr + '-' + to
+        return self
+    
+    def at_least(self, n, s):
         s = rxe.to_regexp_str(s)
         parens = '(?:' + s + ')'
         if n == 0:
@@ -77,7 +81,7 @@ class rxe:
         self.pattern += parens + '{%d}' % n
         return self
 
-    def minmax(self, min, max, s):
+    def at_least_at_most(self, min, max, s):
         s = rxe.to_regexp_str(s)
         parens = '(?:' + s + ')'
         if min == 0 and max == 1:
@@ -87,13 +91,13 @@ class rxe:
         return self
     
     def zero_or_more(self, s):
-        return self.min(0, s)
+        return self.at_least(0, s)
     
     def one_or_more(self, s):
-        return self.min(1, s)
+        return self.at_least(1, s)
     
     def zero_or_one(self, s):
-        return self.minmax(0, 1, s)
+        return self.at_least_at_most(0, 1, s)
     
     def non_greedy(self):
         return self.raw('?')
@@ -202,14 +206,17 @@ def non_word_boundary():
 def literal(s):
     return rxe().literal(s)
 
-def min(n, s):
-    return rxe().min(n, s)
+def range(fr, to):
+    return rxe().range(fr, to)
+
+def at_least(n, s):
+    return rxe().at_least(n, s)
 
 def exactly(n, s):
     return rxe().exactly(n, s)
 
-def minmax(min, max, s):
-    return rxe().minmax(min, max, s)
+def at_least_at_most(min, max, s):
+    return rxe().at_least_at_most(min, max, s)
 
 def zero_or_more(s):
     return rxe().zero_or_more(s)

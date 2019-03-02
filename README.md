@@ -118,11 +118,13 @@ Most of these functions correspond to [patterns of functions](https://docs.pytho
 
 `literal(s)`: Matches the literal string `s`.
 
-`min(n, s)`: Matches if `s` occurs at least `n` times. `s` can be a literal or an `rxe` object.
+`range(fr, to)`: Matches the characters in the range from `fr` to `to`, like `a-z` or `0-9`.
+
+`at_least(n, s)`: Matches if `s` occurs at least `n` times. `s` can be a literal or an `rxe` object.
 
 `exactly(n, s)`: Matches if `s` occurs exactly `n` times. `s` can be a literal or an `rxe` object.
 
-`minmax(min, max, s)`: Matches if `s` occurs at least `min`, at most `max` times. `s` can be a literal or an `rxe` object.
+`at_least_at_most(min, max, s)`: Matches if `s` occurs at least `min`, at most `max` times. `s` can be a literal or an `rxe` object.
 
 `zero_or_more(s)`: Matches if `s` occurs 0 or more times. `s` can be a literal or an `rxe` object.
 

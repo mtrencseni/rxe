@@ -3,7 +3,7 @@ import re
 import rxe
 
 def test_rxe():
-    r = rxe.digit().min(n=1, s='p').min(n=2, s='q')
+    r = rxe.digit().at_least(n=1, s='p').at_least(n=2, s='q')
     assert(r.match('1ppppqqqqq') is not None)
     assert(r.match('pqq') is None)
     assert(r.match('3hello') is None)
@@ -16,12 +16,12 @@ def test_rxe():
     assert(r.fullmatch('(43453453)helloZ') is None)
 
     decimal_expr = (rxe
-        .min(1, rxe.digit())
+        .at_least(1, rxe.digit())
         .literal('.')
-        .min(1, rxe.digit())
+        .at_least(1, rxe.digit())
         )
     int_expr = (rxe
-        .min(1, rxe.digit())
+        .at_least(1, rxe.digit())
         )
     number = rxe.either(decimal_expr, int_expr)
     assert(number.fullmatch('hello') is None)
@@ -71,6 +71,13 @@ def test_rxe():
     assert(r.fullmatch('xy') is None)
     assert(r.fullmatch('yx') is None)
     assert(r.fullmatch('yz') is None)
+    
+    r = rxe.literal('x').set([rxe.range('0', '9'), '-']).literal('y')
+    assert(r.fullmatch('x1y') is not None)
+    assert(r.fullmatch('x-y') is not None)
+    assert(r.fullmatch('x1-y') is None)
+    assert(r.fullmatch('x*y') is None)
+    assert(r.fullmatch('xy') is None)
     
     print('All good.')
 
