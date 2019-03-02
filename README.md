@@ -10,7 +10,7 @@
 
 ### Introduction
 
-`rxe` is a thin wrapper around Python's `re` module (see [official re docs](https://docs.python.org/2/library/re.html)). The various `rxe` functions are wrapper around corresponding `re` patterns. For example, `rxe.digit().one_or_more('a').whitespace()` corresponds to `\da+\s`. Because `rxe` uses parentheses but wants to avoid unnamed groups, the internal (equivalent) representation is actually `\d(?:a)+\s`. This pattern can always be retrieved with `get_pattern()`.
+`rxe` is a thin wrapper around Python's `re` module (see [official re docs](https://docs.python.org/2/library/re.html)). The various `rxe` functions are wrappers around corresponding `re` patterns. For example, `rxe.digit().one_or_more('a').whitespace()` corresponds to `\da+\s`. Because `rxe` uses parentheses but wants to avoid unnamed groups, the internal (equivalent) representation is actually `\d(?:a)+\s`. This pattern can always be retrieved with `get_pattern()`.
 
 ### Motivation
 
@@ -33,7 +33,9 @@ coord = (rxe
 )
 ```
 
-Although it's more code, it's much more readable. Suppose you want to support arbitrary number of whitespace. The diff for this change will be:
+Note how rxe allows the `decimal` regex to be re-used in the `coord` pattern! Although it's more code, it's much more readable.
+
+Suppose you want to support arbitrary number of whitespace. The diff for this change will be:
 
 ```python
 coord = (rxe
@@ -49,7 +51,7 @@ coord = (rxe
 )
 ```
 
-Okay, but we also want to get the latitude and longitude. Let's extract them, but in a readable way:
+Okay, but we also want to extract the latitude and longitude, not just match on it. Let's extract them, but in a readable way:
 
 ```python
 coord = (rxe
