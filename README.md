@@ -61,12 +61,12 @@ coord = (rxe
   .zero_or_more(rxe.whitespace())
   .literal(',')
   .zero_or_more(rxe.whitespace())
-  .exactly(1, rxe.named('lat', decimal)) # <--- line changed
+  .exactly(1, rxe.named('lon', decimal)) # <--- line changed
   .zero_or_more(rxe.whitespace())
   .literal(')')
 )
 
-m = coord2.match('(23.34, 11.0)')
+m = coord.match('(23.34, 11.0)')
 print(m.group('lat'))
 print(m.group('lon'))
 ```
