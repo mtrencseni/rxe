@@ -118,6 +118,11 @@ class rxe:
         self.pattern += '[' + s + ']'
         return self
 
+    def set_except(self, li):
+        s = ''.join([rxe.to_regexp_str(i) for i in li])
+        self.pattern += '[^' + s + ']'
+        return self
+
     def named(self, name, s):
         s = rxe.to_regexp_str(s)
         self.pattern += '(?P<%s>%s)' % (name, s)
@@ -242,8 +247,8 @@ def either(s1, s2):
 def set(li):
     return rxe().set(li)
 
-def non_named(name, s):
-    return rxe().non_named(name, s)
+def set_except(li):
+    return rxe().set_except(li)
 
 def named(name, s):
     return rxe().named(name, s)
