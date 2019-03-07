@@ -155,6 +155,8 @@ Most of these functions correspond to [patterns of functions](https://docs.pytho
 
 `set(li)`: Matches the set `li`, which can also include `rxe` objects. Example `['a', 'b', rxe.digit()]`
 
+`set_except(li)`: Matches anything not in the set `li`, which can also include `rxe` objects. Example `['a', 'b', rxe.digit()]`
+
 `named(name, s)`: Creates a named match group, see the example above.
 
 `assert_lookahead(s)`: Matches if `s` matches next, but doesn’t consume any of the string.
