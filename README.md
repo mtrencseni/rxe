@@ -14,7 +14,7 @@
 
 ### Motivation
 
-Suppose you want to parse geo coordinates from a string, like `(<latitude>,<longitude>)`, where each is a decimal. The raw regular expression would look like `\(\d+\.\d\+,\d+\.\d\+)`. This is hard to read and maintain for the next guy, and diffs will be hard to understand and verify.
+Suppose you want to parse geo coordinates from a string, like `(<latitude>,<longitude>)`, where each is a decimal. The raw regular expression would look like `\(\d+\.\d+,\d+\.\d+\)`. This is hard to read and maintain for the next guy, and diffs will be hard to understand and verify.
 
 With rx, you can write:
 
@@ -70,6 +70,8 @@ m = coord.match('(23.34, 11.0)')
 print(m.group('lat'))
 print(m.group('lon'))
 ```
+
+The equivalent regex for this final product would be `\(\s*(?P<lat>\d+\.\d+)\s*,\s*(?P<lon>\d+\.\d+)\s*\)`.
 
 One more example, parsing email addresses. The regex is `[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,6}`. The equivalent `rxe` code:
 
